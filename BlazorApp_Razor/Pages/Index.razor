@@ -1,27 +1,37 @@
 ﻿@page "/"
-@* Comentário *@
-<h1>Olá, @nome.ToLower()!</h1>
-<h1>data e hora: @DateTime.Today</h1>
-<h1>Dia da semana: @diaDaSemana.ToUpper()</h1>
-<hr />
-<h1>@Saudacao(nome)</h1>
-<hr />
-<h1> 2 + 2 = @(2+2) </h1>
-<hr />
-<button @onclick="@TrataCliqueBotao">Clique aqui</button>
+@*ONE-WAY data binding início*@
+<h1>@Mensagem</h1>
+<h2>@Saudacao()</h2>
+<button @onclick="AtualizaMensagem">Atualizar Mensagem</button>
+@*ONE-WAY data binding fim *@
+
+@*TWO-WAY data binding início*@
+<h1>@Mensagem2</h1>
+<input @bind="Mensagem2" />
+@*TWO-WAY data binding fim*@
+
+
 
 @code{
-    string nome = "Maurilio";
-    private string diaDaSemana = DateTime.Now.DayOfWeek.ToString();
+    @*ONE-WAY data binding inicio*@
+    private string Mensagem { get; set; } = "Olá, Maurilio";
 
-    private string Saudacao(string nome){
-        var mesagem = "Bem-Vindo " + nome.ToUpper();
-        return mesagem;
+    private string Saudacao()
+    {
+        return "Bem vindo, ao Blazor";
     }
 
-    private void TrataCliqueBotao() {
-        Console.WriteLine("Fui clicado");
+    private void AtualizaMensagem()
+    {
+        Mensagem = "Olá, Blazor, tudo bem ???";
     }
+    @*ONE-WAY data binding fim*@
+
+
+    @*TWO-WAY data binding início*@
+    private string Mensagem2 { get; set; } = "Olá, Maurilio";
+    @*TWO-WAY data binding fim*@
+
 
 
 }
